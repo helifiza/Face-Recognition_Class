@@ -1,0 +1,9 @@
+.venv
+.git
+data
+models
+logs
+metrics
+notebooks
+**/__pycache__
+.env
