@@ -24,11 +24,6 @@ Dockerfile
 requirements.txt
 ```
 
-Hai file database là **hai module Python**, dùng hai schema trong cùng database
-PostgreSQL để vẫn có khóa ngoại, giao dịch và JOIN. `students` là thực thể sinh viên,
-không dùng `employees`. Dữ liệu PostgreSQL lưu trong Docker volume `postgres_data`.
-Không dùng `.pkl` hoặc SQLite cho bản backend này; chưa có công cụ chuyển dữ liệu SQLite cũ.
-
 ## Chạy backend
 
 Mở Docker Desktop, đợi Engine hoạt động, rồi chạy tại thư mục dự án:
@@ -38,10 +33,6 @@ docker compose up --build -d
 ```
 
 Swagger API: http://localhost:8000/docs. Health: http://localhost:8000/health.
-Khởi động tự tạo extension, schema, bảng và chỉ mục. Đây là cấu hình phát triển cục bộ,
-bind localhost, tài khoản mặc định `attendance/attendance`. Chưa có xác thực/phân quyền;
-cần bổ sung trước khi mở API cho người dùng khác. Không dùng `docker compose down -v`
-nếu muốn giữ dữ liệu. Khởi tạo hiện tại không thay thế migration cho schema đã tồn tại.
 
 Hoặc chạy Python trên máy và chỉ dùng Docker cho database:
 
@@ -50,10 +41,6 @@ docker compose up -d db
 .venv\Scripts\python.exe -m pip install -r requirements.txt
 .venv\Scripts\python.exe -m uvicorn src.main:app --reload
 ```
-
-`DATABASE_URL` mặc định là `postgresql://attendance:attendance@localhost:5432/attendance`.
-Nếu đổi mật khẩu qua `POSTGRES_PASSWORD`, cập nhật URL tương ứng; ký tự đặc biệt trong
-mật khẩu phải được URL-encode trong URL kết nối.
 
 ## Model và định dạng video
 
@@ -110,12 +97,3 @@ Chỉ ghi nếu sinh viên thuộc học phần và buổi đang OPEN. Khóa duy
 không đạt ngưỡng, `ALREADY_PRESENT` khi đã điểm danh. Trạng thái OPEN/CLOSED do người vận hành
 điều khiển, chưa tự áp giờ học hay phân loại đi muộn. Đây là API nền tảng, chưa có giao diện.
 
-## Kiểm thử
-
-```powershell
-.venv\Scripts\python.exe -m unittest src.test_backend -v
-```
-
-Các test kiểm tra cosine, vector lỗi, tín hiệu phẳng, reset khi gián đoạn,
-ROI, giờ buổi học và các nhánh ghi điểm danh bằng mock. Test này không thay thế
-kiểm thử tích hợp PostgreSQL, model thực và bộ video thật/giả.
