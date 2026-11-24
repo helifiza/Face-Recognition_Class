@@ -1,0 +1,48 @@
+:root {
+  color-scheme: light;
+  --bg-page: #f5f7fb;
+  --bg-card: #fff;
+  --bg-input: #f8fafc;
+  --bg-sidebar: #131b2e;
+  --border: #e2e8f0;
+  --text: #15213a;
+  --muted: #59677d;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --shadow: 0 3px 14px rgb(15 23 42 / 4%);
+}
+body.dark-mode {
+  color-scheme: dark;
+  --bg-page: #0f172a;
+  --bg-card: #1e293b;
+  --bg-input: #172235;
+  --border: #36445a;
+  --text: #f1f5f9;
+  --muted: #b1bfd1;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg-page); color: var(--text); font: 1rem/1.6 'Inter', 'Segoe UI', sans-serif; }
+h1, h2, h3, p { margin: 0; }
+h1 { font-size: clamp(1.5rem, 2.5vw, 1.9rem); line-height: 1.35; letter-spacing: -.03em; }
+h2 { font-size: 1.0625rem; margin-bottom: .65rem; }
+h3 { font-size: 1rem; }
+p + p { margin-top: .5rem; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .5; }
+button, input, select, a { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 3px solid #60a5fa; outline-offset: 3px; }
+h1:focus, #view-outlet:focus { outline: none; }
+a { color: var(--primary); text-underline-offset: 3px; }
+label { display: flex; flex-direction: column; gap: .4rem; font-size: .875rem; font-weight: 600; }
+input, select { width: 100%; min-width: 0; min-height: 44px; border: 1px solid var(--border); border-radius: 9px; padding: .65rem .8rem; color: var(--text); background: var(--bg-input); font-size: .9375rem; }
+select { appearance: none; padding-right: 2.5rem; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23708299' stroke-width='2'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .75rem center; }
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+small, .small { font-size: .8125rem; }
+.muted { color: var(--muted); }
+.error-text { color: #c52c36; }
+body.dark-mode .error-text { color: #fda4af; }
+[hidden] { display: none !important; }
+.skip-link { position: absolute; top: -100px; left: 1rem; z-index: 100; background: var(--bg-card); padding: .75rem; }
+.skip-link:focus { top: 1rem; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; } }

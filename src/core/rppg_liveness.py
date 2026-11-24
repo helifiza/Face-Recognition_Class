@@ -27,7 +27,7 @@ def skin_rgb(frame, bbox):
 class PulseGate:
     """One instance per continuous face track; reset on loss or identity change."""
 
-    def __init__(self, fps=30.0, window=120, stride=15, min_snr=2.2):
+    def __init__(self, fps=30.0, window=120, stride=15, min_snr=0.5):
         if fps <= 5 or window < 60 or stride < 1:
             raise ValueError("Invalid pulse window settings")
         self.fps, self.window, self.stride, self.min_snr = fps, window, stride, min_snr
@@ -83,4 +83,10 @@ class PulseGate:
         elif len(self.bpms) == 3:
             status = "REAL" if np.std(self.bpms) <= 10 else "FAKE"
         self.result = {"status": status, "bpm": bpm, "snr_db": snr}
+        print(
+            f"[rPPG] t={timestamp:.3f}s | SNR={snr:.2f} dB | "
+            f"nguong={self.min_snr:.2f} | BPM={bpm:.1f} | "
+            f"cua_so={len(self.bpms)}/{self.bpms.maxlen} | status={status}",
+            flush=True,
+        )
         return dict(self.result)

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#131b2e" />
+  <title>AttendanceAI · Điểm danh lớp học</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#view-outlet">Đến nội dung chính</a>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4" />
+            <circle cx="12" cy="10" r="3" /><path d="M7 18a5 5 0 0 1 10 0" />
+          </svg>
+        </div>
+        <div><strong class="brand-name">AttendanceAI</strong><span class="brand-role">Quản lý điểm danh</span></div>
+      </div>
+      <nav class="sidebar-nav" aria-label="Điều hướng chính">
+        <button type="button" class="nav-item" data-view="dashboard">Tổng quan</button>
+        <button type="button" class="nav-item" data-view="students">Sinh viên</button>
+        <button type="button" class="nav-item" data-view="courses">Học phần &amp; buổi học</button>
+        <button type="button" class="nav-item" data-view="registration">Đăng ký khuôn mặt</button>
+        <button type="button" class="nav-item" data-view="attendance">Điểm danh</button>
+        <button type="button" class="nav-item" data-view="reports">Báo cáo</button>
+        <button type="button" class="nav-item" data-view="settings">Cài đặt</button>
+      </nav>
+      <div class="sidebar-footer"><span>Cổng quản lý lớp học</span><a href="/docs" target="_blank" rel="noopener">Tài liệu API</a></div>
+    </aside>
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div><p id="current-date" class="date-display"></p><span id="last-sync" class="muted small">Chưa đồng bộ</span></div>
+        <div class="toolbar">
+          <span id="connection-status" class="status-badge neutral" role="status">Đang kết nối…</span>
+          <button type="button" id="refresh-btn" class="btn-outline">Làm mới</button>
+          <button type="button" id="theme-toggle" class="btn-outline" aria-label="Đổi giao diện sáng tối" title="Đổi giao diện sáng tối">Sáng / tối</button>
+        </div>
+      </header>
+      <main class="main-content" id="main-content">
+        <noscript><p class="notice error">Bật JavaScript để sử dụng giao diện.</p></noscript>
+        <div id="connection-error" class="notice error" role="alert" hidden></div>
+        <div id="view-outlet" tabindex="-1"></div>
+      </main>
+    </div>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

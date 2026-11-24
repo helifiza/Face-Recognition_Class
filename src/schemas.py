@@ -15,6 +15,23 @@ class Student(Input):
     email: str | None = None
 
 
+class StudentUpdate(Input):
+    full_name: str | None = Field(default=None, min_length=1, max_length=200)
+    class_name: str | None = Field(default=None, max_length=200)
+    faculty: str | None = Field(default=None, max_length=200)
+    email: str | None = Field(default=None, max_length=254)
+    status: Literal["ACTIVE", "INACTIVE"] | None = None
+
+    @model_validator(mode="after")
+    def check_update(self):
+        if not self.model_fields_set:
+            raise ValueError("Supply at least one field to update")
+        for field in ("full_name", "status"):
+            if field in self.model_fields_set and getattr(self, field) is None:
+                raise ValueError(f"{field} cannot be null")
+        return self
+
+
 class Course(Input):
     course_id: str = Field(min_length=1, max_length=100)
     course_name: str = Field(min_length=1, max_length=200)
